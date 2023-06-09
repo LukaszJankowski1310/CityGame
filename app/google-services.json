@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "129892794273",
+    "project_id": "citygame-169dd",
+    "storage_bucket": "citygame-169dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129892794273:android:48e13fcb902cda344795e0",
+        "android_client_info": {
+          "package_name": "com.example.citygame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129892794273-94amjaejor1qt1fio4saqjlevdvrmdlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoLlYnOQY2JkU33dNpeFgO58OgsA5ha7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129892794273-94amjaejor1qt1fio4saqjlevdvrmdlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
