@@ -29,6 +29,12 @@ class LoginActivity : AppCompatActivity() {
         textViewRegisterRedirect = findViewById(R.id.textViewRegisterRedirect)
 
 
+        textViewRegisterRedirect.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         buttonLogin.setOnClickListener {
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
@@ -52,11 +58,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-            textViewRegisterRedirect.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
 
         }
 

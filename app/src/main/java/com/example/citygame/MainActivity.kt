@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
                     builder.setPositiveButton("Yes") { dialog, _ ->
                         val intent = Intent(this, LoginActivity::class.java)
+                        auth.signOut()
                         startActivity(intent)
                         dialog.dismiss()
                         finish()
