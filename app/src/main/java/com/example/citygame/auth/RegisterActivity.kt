@@ -1,4 +1,4 @@
-package com.example.citygame
+package com.example.citygame.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.citygame.MainActivity
+import com.example.citygame.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -19,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var buttonRegister : Button
     private lateinit var editTextEmail : EditText
     private lateinit var editTextPassword : EditText
+    private lateinit var editTextSurname : EditText
     private lateinit var textViewLoginRedirect : TextView
     private lateinit var editTextName : TextView
 
@@ -32,7 +33,9 @@ class RegisterActivity : AppCompatActivity() {
         editTextName = findViewById(R.id.editTextName)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
+        editTextSurname = findViewById(R.id.editTextSurname)
         textViewLoginRedirect = findViewById(R.id.textViewLoginRedirect)
+
 
         buttonRegister.setOnClickListener {
             // auth properties
@@ -40,6 +43,7 @@ class RegisterActivity : AppCompatActivity() {
             val password = editTextPassword.text.toString()
 
             val name = editTextName.text.toString().trim()
+            val surname = editTextSurname.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Fill in all inputs !", Toast.LENGTH_SHORT).show()
@@ -49,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+
                         Log.d(TAG, "createUserWithEmail:success")
                         val user = auth.currentUser
                         val uid = user?.uid
@@ -57,22 +61,21 @@ class RegisterActivity : AppCompatActivity() {
                         val usersRef = database.reference.child("users").child(uid!!)
                         val userData = HashMap<String, Any>()
                         userData["name"] = name
+                        userData["surname"] = surname
+                        userData["email"] = email
                         usersRef.setValue(userData)
-
 
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
-                      //  updateUI(user)
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         Toast.makeText(
                             baseContext,
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        //updateUI(null)
+
                     }
                 }
         }

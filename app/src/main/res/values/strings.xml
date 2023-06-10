@@ -8,4 +8,17 @@
     <string name="logout">Logout</string>
     <string name="sign_up_redirect">Not yet registered? Sign up</string>
     <string name="login_user_redirect">Already an user ? Login</string>
+    <string name="header_title">Poznań City Game</string>
+
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="authenticate">Authenticate</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="visited_places">Visited Places</string>
+    <string name="map">Map</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="surname">Surname</string>
+
+
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".RegisterActivity">
+    tools:context=".auth.RegisterActivity">
 
     <EditText
         android:id="@+id/editTextName"
@@ -16,6 +16,16 @@
         android:autofillHints="username"
         android:inputType="text"
         />
+
+    <EditText
+        android:id="@+id/editTextSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/surname"
+        android:autofillHints="username"
+        android:inputType="text"
+        />
+
 
     <EditText
         android:id="@+id/editTextEmail"
