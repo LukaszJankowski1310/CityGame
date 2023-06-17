@@ -13,6 +13,13 @@
             android:id="@+id/nav_your_profile"
             android:icon="@drawable/baseline_man_24"
             android:title="@string/your_profile"/>
+
+        <item
+            android:id="@+id/nav_your_achievements"
+            android:icon="@drawable/baseline_check_circle_24"
+            android:title="@string/achievements"/>
+
+
     </group>
 
     <group android:checkableBehavior="single">

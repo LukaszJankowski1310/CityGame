@@ -83,12 +83,12 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Handle any errors that occurred
+                Log.i(TAG, databaseError.details)
             }
         }
         userRef.addValueEventListener(valueEventListener)
 
-        val file : File = File(requireActivity().filesDir,  "${uid}_profile_photo.jpg")
+        val file : File = File(requireActivity().filesDir, "${uid}_profile_photo.jpg")
         if(file.exists()) {
             imageViewUserPhoto.setImageURI(imageUri)
         }

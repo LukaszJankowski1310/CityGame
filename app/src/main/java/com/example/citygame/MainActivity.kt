@@ -14,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.citygame.auth.LoginActivity
+import com.example.citygame.places.MapsFragment
 import com.example.citygame.profile.ProfileFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -45,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+
+        replaceFragment(MapsFragment(), R.string.map)
+
         navigationView.setNavigationItemSelectedListener {menuItem ->
             menuItem.isChecked = true
 
@@ -52,17 +56,22 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_map -> {
                     Toast.makeText(applicationContext, "Map", Toast.LENGTH_SHORT).show()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    replaceFragment(MapsFragment(), R.string.map)
                 }
 
                 R.id.nav_visited_places -> {
                     Toast.makeText(applicationContext, "Visited places", Toast.LENGTH_SHORT).show()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+
                 }
 
                 R.id.nav_your_profile -> {
                     Toast.makeText(applicationContext, "Your profile", Toast.LENGTH_SHORT).show()
                     replaceFragment(ProfileFragment(), R.string.your_profile)
+                }
+
+                R.id.nav_your_achievements -> {
+                    Toast.makeText(applicationContext, "Achievements", Toast.LENGTH_SHORT).show()
+                    replaceFragment(AchievementsFragment(), R.string.achievements)
                 }
 
 
