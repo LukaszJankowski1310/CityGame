@@ -19,6 +19,7 @@ import com.example.citygame.profile.ProfileFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.maps.GeoApiContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -72,6 +73,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_your_achievements -> {
                     Toast.makeText(applicationContext, "Achievements", Toast.LENGTH_SHORT).show()
                     replaceFragment(AchievementsFragment(), R.string.achievements)
+                }
+
+
+                R.id.nav_check_weather -> {
+                    Toast.makeText(applicationContext, "Weather", Toast.LENGTH_SHORT).show()
+                    replaceFragment(WeatherFragment(), R.string.weather)
                 }
 
 
@@ -130,6 +137,10 @@ class MainActivity : AppCompatActivity() {
 
         rootRef.addValueEventListener(valueEventListener)
 
+
+
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -144,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.addToBackStack(title.toString())
         fragmentTransaction.commit()
         drawerLayout.closeDrawer(GravityCompat.START)
         setTitle(title)

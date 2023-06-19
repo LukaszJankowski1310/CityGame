@@ -21,6 +21,7 @@
     <string name="surname">Surname</string>
     <string name="Achievements" />
     <string name="achievements">Achievements</string>
+    <string name="weather">Weather</string>
 
 
 </resources>
