@@ -154,7 +154,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
                 p0.lastLocation?.let { location ->
                     if (chosenPlace != null ) {
-                        if (viewModel.getDistance()!! < 15) {
+                        if (viewModel.getDistance()!! < 25) {
                             saveVisitedPlace(chosenPlace)
                             removeTrace()
                             if (!popUpDisplayed)
