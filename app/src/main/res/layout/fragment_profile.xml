@@ -3,26 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.ProfileFragment"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageViewUserPhoto"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/baseline_person_24"/>
+        android:src="@drawable/baseline_person_24"
+        android:scaleType="centerCrop"
+        />
 
     <Button
+        android:id="@+id/button_change_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update photo"
-        android:id="@+id/button_change_photo"/>
-    
-    
+        android:text="Update Photo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Email"
         style="@style/TextViewStyle" />
 
@@ -30,6 +33,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Name"
         style="@style/TextViewStyle" />
 
@@ -37,6 +41,8 @@
         android:id="@+id/surnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Surname"
         style="@style/TextViewStyle" />
+
 </LinearLayout>

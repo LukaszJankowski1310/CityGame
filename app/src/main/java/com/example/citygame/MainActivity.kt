@@ -14,12 +14,13 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.citygame.auth.LoginActivity
-import com.example.citygame.places.MapsFragment
+import com.example.citygame.map.MapsFragment
+import com.example.citygame.profile.AchievementsFragment
 import com.example.citygame.profile.ProfileFragment
+import com.example.citygame.profile.VisitedPlacesFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.maps.GeoApiContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle : ActionBarDrawerToggle
     private lateinit var fragmentContainer : FrameLayout
 
+    private lateinit var mapFragment : MapsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +49,10 @@ class MainActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        mapFragment = MapsFragment()
 
-        replaceFragment(MapsFragment(), R.string.map)
+//        replaceFragment(mapFragment, R.string.map)
+        replaceFragment(VisitedPlacesFragment(), R.string.visited_places)
 
         navigationView.setNavigationItemSelectedListener {menuItem ->
             menuItem.isChecked = true
@@ -57,12 +61,12 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_map -> {
                     Toast.makeText(applicationContext, "Map", Toast.LENGTH_SHORT).show()
-                    replaceFragment(MapsFragment(), R.string.map)
+                    replaceFragment(mapFragment, R.string.map)
                 }
 
                 R.id.nav_visited_places -> {
                     Toast.makeText(applicationContext, "Visited places", Toast.LENGTH_SHORT).show()
-
+                    replaceFragment(VisitedPlacesFragment(), R.string.visited_places)
                 }
 
                 R.id.nav_your_profile -> {
@@ -81,11 +85,10 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(WeatherFragment(), R.string.weather)
                 }
 
-
                 R.id.nav_logout -> {
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle("Confirmation")
-                    builder.setMessage("Are you sure you want to proceed?")
+                    builder.setMessage("Are you sure you want to logout?")
 
                     builder.setPositiveButton("Yes") { dialog, _ ->
                         val intent = Intent(this, LoginActivity::class.java)
