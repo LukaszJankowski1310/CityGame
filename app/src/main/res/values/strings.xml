@@ -23,5 +23,17 @@
     <string name="achievements">Achievements</string>
     <string name="weather">Weather</string>
 
+    <string name="profile_email">Email: %s</string>
+    <string name="profile_name">Name:  %s</string>
+    <string name="profile_surname">Surname: %s</string>
+
+    <string name="profile_title">Title: %s</string>
+    <string name="pressure">Pressure</string>
+    <string name="visibility">Visibility</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="humidity">Humidity</string>
+    <string name="feels_like">Feels like</string>
+    <string name="condition">Condition</string>
+    <string name="temperature">Temperature</string>
 
 </resources>

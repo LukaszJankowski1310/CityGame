@@ -116,10 +116,7 @@ class VisitedPlacesFragment : Fragment() {
         return view
     }
 
-    private fun showCustomPopupDialog(id: Int)
-    {
-        Log.i("click", id.toString())
-    }
+
     private fun showCustomPopupDialog(visitedPlace: VisitedPlace) {
 
         val dialog = Dialog(requireContext());

@@ -26,10 +26,15 @@ class WeatherFragment : Fragment() {
     private lateinit var weatherCity : TextView
     private lateinit var weatherImage : ImageView
     private lateinit var weatherTemp : TextView
-    private lateinit var weatherCondition : TextView
     private lateinit var progressBar : ProgressBar
 
 
+
+    private lateinit var tvCondition: TextView
+    private lateinit var tvHumidity: TextView
+    private lateinit var tvWindSpeed: TextView
+    private lateinit var tvVisibility: TextView
+    private lateinit var tvPressure: TextView
 
 
 
@@ -50,9 +55,15 @@ class WeatherFragment : Fragment() {
         weatherCity = view.findViewById(R.id.weather_city)
         weatherImage = view.findViewById(R.id.weather_image)
         weatherTemp = view.findViewById(R.id.weather_temp)
-        weatherCondition = view.findViewById(R.id.weather_condition)
         progressBar = view.findViewById(R.id.progressBar)
 
+
+
+        tvCondition = view.findViewById(R.id.tvCondition)
+        tvHumidity = view.findViewById(R.id.tvHumidity)
+        tvWindSpeed = view.findViewById(R.id.tvWindSpeed)
+        tvVisibility = view.findViewById(R.id.tvVisibility)
+        tvPressure = view.findViewById(R.id.tvPressure)
 
 
 
@@ -65,6 +76,14 @@ class WeatherFragment : Fragment() {
 
         return view
     }
+
+//    Temperature in Celsius (temp_c)
+//    Condition description (condition.text)
+//    Feels like temperature in Celsius (feelslike_c)
+//    Humidity (humidity)
+//    Wind speed in kilometers per hour (wind_kph)
+//    Visibility in kilometers (vis_km)
+//    Pressure in millibars (pressure_mb)
 
 
     private fun displayWeather() {
@@ -80,8 +99,14 @@ class WeatherFragment : Fragment() {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(weatherImage)
 
-        weatherTemp.text = weather.current.temp_c.toString()
-        weatherCondition.text = weather.current.condition.text
+
+        weatherTemp.text = String.format("%.1f°C", weather.current.temp_c)
+
+        tvCondition.text = String.format("Condition: %s", weather.current.condition.text)
+        tvHumidity.text = String.format("Humidity: %d", weather.current.humidity)
+        tvWindSpeed.text = String.format("Wind Speed: %.2f kph", weather.current.wind_kph)
+        tvVisibility.text = String.format("Visibility: %.2f km", weather.current.vis_km)
+        tvPressure.text = String.format("Pressure: %.2f hPa", weather.current.pressure_mb)
     }
 
 }

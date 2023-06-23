@@ -8,7 +8,8 @@
     tools:context=".profile.ProfileFragment"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:padding="6dp"
         android:id="@+id/traceInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -18,47 +19,40 @@
 
         <TextView
             android:id="@+id/titleTV"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Title"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="7dp"
+           />
 
         <TextView
             android:id="@+id/distanceTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distance : "
-            app:layout_constraintBottom_toTopOf="@+id/removeTraceBTN"
-
-            app:layout_constraintEnd_toStartOf="@+id/titleTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="7dp"
+            android:textSize="20sp"
+             />
 
         <TextView
             android:id="@+id/timeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time : "
-            app:layout_constraintBottom_toTopOf="@+id/removeTraceBTN"
-
-            app:layout_constraintEnd_toStartOf="@+id/titleTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/distanceTV" />
+            android:textSize="20sp"
+            />
 
         <Button
             android:id="@+id/removeTraceBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Finish"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:gravity="center"
+             />
+    </LinearLayout>
 
 
     <androidx.fragment.app.FragmentContainerView

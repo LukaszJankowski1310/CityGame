@@ -41,6 +41,7 @@ class ProfileFragment : Fragment() {
     private lateinit var textViewSurname : TextView
     private lateinit var imageViewUserPhoto : ImageView
     private lateinit var buttonChangePhoto : Button
+    private lateinit var titleTextView : TextView
 
     private lateinit var imageUri : Uri
     private lateinit var takePictureLauncher : ActivityResultLauncher<Uri>
@@ -67,6 +68,7 @@ class ProfileFragment : Fragment() {
         textViewSurname = view.findViewById(R.id.surnameTextView)
         buttonChangePhoto = view.findViewById(R.id.button_change_photo)
         imageViewUserPhoto = view.findViewById(R.id.imageViewUserPhoto)
+        titleTextView = view.findViewById(R.id.titleTextView)
 
 
         val userRef = databaseRef.child("users").child(uid)
@@ -77,9 +79,16 @@ class ProfileFragment : Fragment() {
                 val name = dataSnapshot.child("name").getValue(String::class.java)
                 val surname = dataSnapshot.child("surname").getValue(String::class.java)
 
-                textViewEmail.text = email
-                textViewName.text = name
-                textViewSurname.text = surname
+                val visitedPlaces = dataSnapshot.child("visited_places")
+                val visitedPlacesNum = visitedPlaces.children.count()
+                val title = UserTitle.getTitle(visitedPlacesNum)
+
+                textViewEmail.text = getString(R.string.profile_email, email)
+                textViewName.text = getString(R.string.profile_name, name)
+                textViewSurname.text = getString(R.string.profile_surname, surname)
+
+                titleTextView.text = getString(R.string.profile_title, title)
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -148,10 +157,39 @@ class ProfileFragment : Fragment() {
     }
 
 
+//    private fun getTitle(num :Int) : String  {
+//        val title =  when (num) {
+//            0 -> "Ordinary Novice"
+//            1 -> "Beginner Seeker"
+//            2 -> "Rookie"
+//            3 -> "City Explorer"
+//            4 -> "Determined Collector"
+//            5 -> "Seasoned Collector"
+//            6 -> "Master of Alleys"
+//            7 -> "Discoverer of the Century"
+//            8 -> "Poznan Legend"
+//            9 -> "Golden Pyra"
+//
+//            else -> "Golden Pyra"
+//        }
+//
+//        return title
+//    }
+
     companion object {
         const val TAG = "ProfileFragment"
     }
 
+//    Ordinary Novice
+//    Beginner Seeker
+//    Rookie
+//    City Explorer
+//    Determined Collector
+//    Seasoned Collector
+//    Master of Alleys
+//    Discoverer of the Century
+//    Poznan Legend
+//    Golden Pyra
 
 
 }

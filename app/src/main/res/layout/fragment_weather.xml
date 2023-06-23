@@ -8,18 +8,21 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
+
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:visibility="gone" />
+        />
 
     <TextView
         android:id="@+id/weather_city"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:gravity="center"
+        android:textSize="34sp"
         android:textColor="#000000"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
@@ -41,12 +44,63 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/weather_condition"
-        android:layout_width="wrap_content"
+
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Condition"
+            style="@style/MyTextViewStyle"
+            />
+
+
+
+        <TextView
+            android:id="@+id/tvHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity"
+            style="@style/MyTextViewStyle"
+            />
+
+        <TextView
+            android:id="@+id/tvWindSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wind Speed"
+            style="@style/MyTextViewStyle"
+            />
+
+        <TextView
+            android:id="@+id/tvVisibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visibility"
+            style="@style/MyTextViewStyle"
+            />
+
+        <TextView
+            android:id="@+id/tvPressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pressure"
+            style="@style/MyTextViewStyle"
+            />
+
+
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

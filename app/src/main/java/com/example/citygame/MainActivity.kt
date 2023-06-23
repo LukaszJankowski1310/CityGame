@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         mapFragment = MapsFragment()
 
-//        replaceFragment(mapFragment, R.string.map)
-        replaceFragment(VisitedPlacesFragment(), R.string.visited_places)
+
+        replaceFragment(mapFragment, R.string.map, false)
 
         navigationView.setNavigationItemSelectedListener {menuItem ->
             menuItem.isChecked = true
@@ -154,11 +154,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun replaceFragment(fragment: Fragment, title: Int) {
+    private fun replaceFragment(fragment: Fragment, title: Int, addToBackStack : Boolean = true) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+
         fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.addToBackStack(title.toString())
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(title.toString())
+        }
+
         fragmentTransaction.commit()
         drawerLayout.closeDrawer(GravityCompat.START)
         setTitle(title)

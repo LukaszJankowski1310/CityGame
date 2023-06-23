@@ -18,7 +18,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet.Layout
+import androidx.constraintlayout.widget.ConstraintSet.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -29,6 +29,7 @@ import com.example.citygame.BuildConfig
 import com.example.citygame.R
 import com.example.citygame.profile.ProfileFragment
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -61,6 +62,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var removeTraceBTN : Button
     private lateinit var titleTV : TextView
     private lateinit var timeTV : TextView
+
+    private var popUpDisplayed = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,10 +121,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             }
 
             distanceTV.text = String.format("Distance : %.2f", viewModel.getDistance())
+
+            removeTraceBTN.visibility = View.VISIBLE
+
         } else {
             titleTV.text = "Poznań"
             timeTV.text = "Time: "
             distanceTV.text = "Distance :"
+
+            removeTraceBTN.visibility = View.GONE
+
         }
     }
 
@@ -130,9 +139,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         readLocationsFromDB()
         requestForPermissionAndEnableLocation()
 
+
         googleMap.setOnMarkerClickListener {
             val place = viewModel.getPlaceByMarker(it)
-
+            popUpDisplayed = false
             viewModel.setChosenPlace(place!!)
             true
         }
@@ -144,10 +154,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
                 p0.lastLocation?.let { location ->
                     if (chosenPlace != null ) {
-                        if (viewModel.getDistance()!! < 20) {
+                        if (viewModel.getDistance()!! < 15) {
                             saveVisitedPlace(chosenPlace)
                             removeTrace()
-                            showCustomPopupDialog(chosenPlace)
+                            if (!popUpDisplayed)
+                            {
+                                showCustomPopupDialog(chosenPlace)
+                                popUpDisplayed = true
+                            }
 
                             return@let
                         }
@@ -175,7 +189,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 locationCallback,
                 Looper.getMainLooper()
             )
+            moveMapToUserLocalization()
         }
+
 
 
     }
@@ -220,6 +236,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                         val distance = location.distanceTo(destination.location)
                         viewModel.setDistance(distance)
                         displayTraceInformation()
+                    }
+                }
+        }
+    }
+
+    private fun moveMapToUserLocalization() {
+        if (checkPermission()) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        val userLatLng = LatLng(location.latitude, location.longitude)
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLng))
+                        googleMap.moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM))
+
                     }
                 }
         }
@@ -311,7 +341,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showCustomPopupDialog(place : Place) {
-
+        Log.i("POPUP", "POPUP")
         val dialog = Dialog(requireContext());
         dialog.setContentView(R.layout.pop_up)
 
